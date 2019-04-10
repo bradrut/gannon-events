@@ -16,25 +16,30 @@ class App extends Component {
             <Router>
                 <div className="container">
                     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                        <a class="navbar-brand" href="https://gannon.edu/" target="_blank">
-                            <img src={logo} width="30" height="30" alt="Gannon.edu" />
-                        </a>
-                        <Link to="/" className="navbar-brand">Gannon Events</Link>
-                        <div className="collpase navbar-collapse">
-                            <ul className="navbar-nav mr-auto">
-                                <li className="navbar-item">
+                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                            <span className="navbar-toggler-icon"></span>
+                        </button>
+                        <div className="collapse navbar-collapse" id="navbarToggler">
+                            <a className="navbar-brand" href="/">Gannon Events</a>
+                            <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
+                                <li className="nav-item active">
                                     <Link to="/" className="nav-link">Home</Link>
                                 </li>
-                                <li className="navbar-item">
+                                <li className="nav-item">
                                     <Link to="/create" className="nav-link">Create Event</Link>
                                 </li>
                             </ul>
+                            <form className="form-inline my-2 my-lg-0">
+                                <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></input>
+                                <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
                         </div>
                     </nav>
                     <br/>
                     <Route path="/" exact component={EventsList} />
-                    <Route path="/edit/:id" component={EditEvent} />
+                    <Route path="/details/:id" component={EventDetails} />
                     <Route path="/create" component={CreateEvent} />
+                    <Route path="/edit/:id" component={EditEvent} />
                 </div>
             </Router>
         );
