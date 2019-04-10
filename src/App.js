@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/jquery/dist/jquery.min.js";
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
 
 import EventsList from "./components/events-list.component.js";
 import EventDetails from "./components/event-details.component.js";
@@ -19,8 +21,8 @@ class App extends Component {
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
+                        <a className="navbar-brand" href="/">Gannon Events</a>
                         <div className="collapse navbar-collapse" id="navbarToggler">
-                            <a className="navbar-brand" href="/">Gannon Events</a>
                             <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
                                 <li className="nav-item active">
                                     <Link to="/" className="nav-link">Home</Link>
