@@ -10,8 +10,6 @@ import EventDetails from "./components/event-details.component.js";
 import CreateEvent from "./components/create-event.component.js";
 import EditEvent from "./components/edit-event.component.js";
 
-import logo from './logo.svg';
-
 class App extends Component {
     render() {
         return (

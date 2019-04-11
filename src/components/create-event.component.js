@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 export default class CreateEvent extends Component {
 
@@ -68,6 +69,19 @@ export default class CreateEvent extends Component {
         console.log(`Start Time: ${this.state.start_time}`);
         console.log(`End Time: ${this.state.end_time}`);
 
+        const newEvent = {
+            event_owner: this.state.event_owner,
+            event_name: this.state.event_name,
+            event_desc: this.state.event_desc,
+            event_date: this.state.event_date,
+            start_time: this.state.start_time,
+            end_time: this.state.end_time,
+            event_active: this.state.event_active
+        };
+
+        axios.post('http://localhost:4000/events/add', newEvent)
+            .then(res => console.log(res.data));
+
         // Reset the form state.
         this.setState({
             event_owner: '',
@@ -97,7 +111,7 @@ export default class CreateEvent extends Component {
                         <label>Event Description: </label>
                         <textarea
                                 className="form-control"
-                                value={this.state.event_description}
+                                value={this.state.event_desc}
                                 onChange={this.onChangeEventDesc}
                                 />
                     </div>
