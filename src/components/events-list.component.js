@@ -24,8 +24,10 @@ import Typography from '@material-ui/core/Typography';
 )*/
 
 const styles = {
-    cards: {
+    card: {
+        display: 'inline-block',
         marginBottom: '20px',
+        marginRight: '20px',
         width: '350px',
     },
     media: {
@@ -33,12 +35,20 @@ const styles = {
         maxWidth: '350px',
         width: 'auto',
         height: 'auto',
-    }
+    },
+    container: {
+        marginTop: '60px',
+        marginLeft: '20px',
+        marginRight: '20px',
+    },
+    cardContainer: {
+        marginTop: '20px',
+    },
 }
 
 const Event = props => (
-    <Card style={styles.cards}>
-        <Link to={"/edit/"+props.event._id}>
+    <Card style={styles.card}>
+        <Link to={"/details/"+props.event._id} style={{ textDecoration: 'none' }}>
             <CardActionArea>
                 <CardMedia
                     component="img"
@@ -55,14 +65,12 @@ const Event = props => (
                     <Typography component="p">
                         {props.event.event_desc}
                     </Typography>
+                    <Typography component="p">
+                        {props.event.event_date}
+                    </Typography>
                 </CardContent>
             </CardActionArea>
         </Link>
-        <CardActions>
-            <Button size="small" color="primary">
-                Learn More
-            </Button>
-        </CardActions>
     </Card>
 )
 
@@ -91,11 +99,12 @@ export default class EventsList extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Events List</h3>
-                    <div>
-                        { this.eventList() }
-                    </div>
+            <div style={styles.container}>
+                <h3>Upcoming Events</h3>
+                <hr/>
+                <div style={styles.cardContainer}>
+                    { this.eventList() }
+                </div>
             </div>
         )
     }
