@@ -96,7 +96,7 @@ export default class CreateEvent extends Component {
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
+            <div style={{padding: 50}}>
                 <h3>Create New Event</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -119,7 +119,7 @@ export default class CreateEvent extends Component {
                         <label>Event Date: </label>
                         <input  type="date"
                                 className="form-control"
-                                value={this.state.event_desc}
+                                value={this.state.event_date}
                                 onChange={this.onChangeEventDate}
                                 />
                     </div>
