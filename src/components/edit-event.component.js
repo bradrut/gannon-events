@@ -5,13 +5,21 @@ process.argv.forEach(function (val, index, array) {
     console.log(index + ': ' + val);
 });
 
+const styles = {
+    container: {
+        marginTop: '40px',
+        height: window.innerHeight-64,
+        padding: '10px',
+    }
+}
+
 export default class EditEvent extends Component {
 
     constructor(props) {
         super(props);
 
         this.onChangeEventName = this.onChangeEventName.bind(this);
-        this.onChangeEventDescription = this.onChangeEventDescription.bind(this);
+        this.onChangeEventDesc = this.onChangeEventDesc.bind(this);
         this.onChangeEventDate = this.onChangeEventDate.bind(this);
         this.onChangeStartTime = this.onChangeStartTime.bind(this);
         this.onChangeEndTime = this.onChangeEndTime.bind(this);
@@ -52,7 +60,7 @@ export default class EditEvent extends Component {
         });
     }
 
-    onChangeEventDescription(e) {
+    onChangeEventDesc(e) {
         this.setState({
             event_desc: e.target.value
         });
@@ -96,7 +104,7 @@ export default class EditEvent extends Component {
 
     render() {
         return (
-            <div>
+            <div style={styles.container}>
                 <h3 align="center">Update Event</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -110,6 +118,7 @@ export default class EditEvent extends Component {
                     <div className="form-group">
                         <label>Event Description: </label>
                         <textarea
+                                type="text"
                                 className="form-control"
                                 value={this.state.event_desc}
                                 onChange={this.onChangeEventDesc}
@@ -119,7 +128,7 @@ export default class EditEvent extends Component {
                         <label>Event Date: </label>
                         <input  type="date"
                                 className="form-control"
-                                value={this.state.event_desc}
+                                value={this.state.event_date}
                                 onChange={this.onChangeEventDate}
                                 />
                     </div>
