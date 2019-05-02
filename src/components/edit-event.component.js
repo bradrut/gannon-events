@@ -36,8 +36,9 @@ export default class EditEvent extends Component {
                     event_name: response.data.event_name,
                     event_desc: response.data.event_desc,
                     event_date: response.data.event_date,
-                    start_time: response.data.end_time,
-                    end_time: response.data.event_active
+                    start_time: response.data.start_time,
+                    end_time: response.data.end_time,
+                    event_active: response.data.event_active,
                 })
             })
             .catch(function (error) {

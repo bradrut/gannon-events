@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+const styles = {
+    container: {
+        marginTop: '40px',
+        height: window.innerHeight-64,
+        padding: '10px',
+    }
+}
+
 export default class CreateEvent extends Component {
 
     constructor(props) {
@@ -13,7 +21,7 @@ export default class CreateEvent extends Component {
             event_date: '',
             start_time: '',
             end_time: '',
-            event_active: false
+            event_active: true,
         }
 
         // Bind the onChange methods to 'this' since they are modifying this component's state object.
@@ -57,11 +65,7 @@ export default class CreateEvent extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.setState({
-            event_active: true
-        })
 
-        // This is where the backend logic will go to submit the new event to the database.
         console.log(`Form submitted:`);
         console.log(`Event Name: ${this.state.event_name}`);
         console.log(`Event Description: ${this.state.event_desc}`);
@@ -76,7 +80,7 @@ export default class CreateEvent extends Component {
             event_date: this.state.event_date,
             start_time: this.state.start_time,
             end_time: this.state.end_time,
-            event_active: this.state.event_active
+            event_active: true,
         };
 
         axios.post('http://localhost:4000/events/add', newEvent)
@@ -92,11 +96,13 @@ export default class CreateEvent extends Component {
             end_time: '',
             event_active: false
         })
+
+        this.props.history.push('/');
     }
 
     render() {
         return (
-            <div style={{marginTop: 10}}>
+            <div style={styles.container}>
                 <h3>Create New Event</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -119,7 +125,7 @@ export default class CreateEvent extends Component {
                         <label>Event Date: </label>
                         <input  type="date"
                                 className="form-control"
-                                value={this.state.event_desc}
+                                value={this.state.event_date}
                                 onChange={this.onChangeEventDate}
                                 />
                     </div>
@@ -139,7 +145,7 @@ export default class CreateEvent extends Component {
                                 onChange={this.onChangeEndTime}
                                 />
                     </div>
-                    <div className="form-group">
+                    <div className="form-group" style={{paddingTop: '30px'}}>
                         <input type="submit" value="Submit Event" className="btn btn-primary" />
                     </div>
                 </form>

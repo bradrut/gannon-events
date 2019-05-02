@@ -25,7 +25,7 @@ const styles = {
         position: 'fixed',
         width: '100%',
         zIndex: '1',
-        boxShadow: '0px 1px 10px grey',
+        boxShadow: '0px 1px 5px grey',
     },
     colorWhite: {
         color: '#fff',

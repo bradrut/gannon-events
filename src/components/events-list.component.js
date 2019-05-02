@@ -26,9 +26,9 @@ import Typography from '@material-ui/core/Typography';
 const styles = {
     card: {
         display: 'inline-block',
-        marginBottom: '20px',
-        marginRight: '20px',
+        marginBottom: '8px',
         width: '350px',
+        marginRight: '10px',
     },
     media: {
         display: 'block',
@@ -38,8 +38,9 @@ const styles = {
     },
     container: {
         marginTop: '60px',
-        marginLeft: '20px',
+        marginLeft: '12px',
         marginRight: '20px',
+        height: window.innerHeight-84   ,
     },
     cardContainer: {
         marginTop: '20px',
@@ -52,10 +53,8 @@ const Event = props => (
             <CardActionArea>
                 <CardMedia
                     component="img"
-                    alt="Contemplative Reptile"
                     height="140"
                     image={require("../resources/ErieTower.jpg")}
-                    title="Contemplative Reptile"
                     style={styles.media}
                 />
                 <CardContent>
@@ -84,7 +83,10 @@ export default class EventsList extends Component {
     componentDidMount() {
         axios.get('http://localhost:4000/events/')
             .then(response => {
-                this.setState({ events: response.data });
+                const activeEvents = response.data.filter(event => event.event_active === 'true');
+                //console.log(activeEvents);
+
+                this.setState({ events: activeEvents });
             })
             .catch(function (error){
                 console.log(error);
