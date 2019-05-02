@@ -10,8 +10,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 const styles = {
     container: {
         marginTop: '60px',
-        marginLeft: '20px',
-        height: window.innerHeight-85,
+        marginLeft: '15px',
+        height: window.innerHeight-20,
     },
     media: {
         maxWidth: window.innerWidth-38,
@@ -20,6 +20,9 @@ const styles = {
         boxShadow: '0px 1px 2px grey',
         borderRadius: '3px',
     },
+    detailsContainer: {
+        paddingTop: '20px',
+    }
 }
 
 export default class EventDetails extends Component {
@@ -83,15 +86,24 @@ export default class EventDetails extends Component {
                 <Typography variant="h4">{this.state.event_name}</Typography>
                 <hr style={{marginTop: '5px'}}/>
                 <img src={require('../resources/ErieTower.jpg')} style={styles.media}/>
-                <p>{this.state.event_date} from {this.state.start_time} to {this.state.end_time}</p>
-                <p style={{visibility: 'hidden'}}>Break</p>
-                <Typography variant="h6">Description</Typography>
-                <p>{this.state.event_desc}</p>
-                <p style={{visibility: 'hidden'}}>Break</p>
+                <div style={styles.detailsContainer}>
+                    <Typography variant="h6">Description:</Typography>
+                    <p>{this.state.event_desc}</p>
+                    <Typography variant="h6">Date:</Typography>
+                    <p>{this.state.event_date}</p>
+                    <Typography variant="h6">Time:</Typography>
+                    <p>{this.state.start_time} to {this.state.end_time}</p>
+                    <p style={{visibility: 'hidden'}}>Break</p>
+                </div>
 
-                <form onSubmit={this.onArchive}>
-                    <input type="submit" value="Archive" className="btn btn-danger" />
-                </form>
+                <div style={{position: 'relative', top: '20px'}}>
+                    <Link to={"/edit/"+this.props.match.params.id} style={{ textDecoration: 'none', display: 'inline' }}>
+                        <input type="submit" value="Edit" className="btn btn-primary" style={{display: 'inline'}}/>
+                    </Link>
+                    <form onSubmit={this.onArchive}>
+                        <input type="submit" value="Delete" className="btn btn-danger" style={{float: 'right', marginRight: '20px', position: 'relative', top: '-38px', left: '-200px', display: 'inline'}}/>
+                    </form>
+                </div>
             </div>
         )
     }
