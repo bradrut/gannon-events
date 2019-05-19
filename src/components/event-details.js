@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = {
-    container: {
+    pageContainer: {
         marginTop: '60px',
         marginLeft: '15px',
         height: window.innerHeight-20,
@@ -82,10 +78,10 @@ export default class EventDetails extends Component {
 
     render() {
         return (
-            <div style={styles.container}>
+            <div style={styles.pageContainer}>
                 <Typography variant="h4">{this.state.event_name}</Typography>
                 <hr style={{marginTop: '5px'}}/>
-                <img src={require('../resources/ErieTower.jpg')} style={styles.media}/>
+                <img src={require('../resources/ErieTower.jpg')} style={styles.media} alt=''/>
                 <div style={styles.detailsContainer}>
                     <Typography variant="h6">Description:</Typography>
                     <p>{this.state.event_desc}</p>

@@ -1,29 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-process.argv.forEach(function (val, index, array) {
-    console.log(index + ': ' + val);
-});
-
 const styles = {
-    container: {
+    pageContainer: {
         marginTop: '40px',
         height: window.innerHeight-64,
         padding: '10px',
     }
 }
 
-export default class EditEvent extends Component {
+export default class CreateEvent extends Component {
 
     constructor(props) {
         super(props);
-
-        this.onChangeEventName = this.onChangeEventName.bind(this);
-        this.onChangeEventDesc = this.onChangeEventDesc.bind(this);
-        this.onChangeEventDate = this.onChangeEventDate.bind(this);
-        this.onChangeStartTime = this.onChangeStartTime.bind(this);
-        this.onChangeEndTime = this.onChangeEndTime.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             event_owner: '',
@@ -32,26 +21,16 @@ export default class EditEvent extends Component {
             event_date: '',
             start_time: '',
             end_time: '',
-            event_active: true
+            event_active: true,
         }
-    }
 
-    componentDidMount() {
-        axios.get('http://localhost:4000/events/'+this.props.match.params.id)
-            .then(response => {
-                this.setState({
-                    event_owner: response.data.event_owner,
-                    event_name: response.data.event_name,
-                    event_desc: response.data.event_desc,
-                    event_date: response.data.event_date,
-                    start_time: response.data.start_time,
-                    end_time: response.data.end_time,
-                    event_active: response.data.event_active,
-                })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        // Bind the onChange methods to 'this' since they are modifying this component's state object.
+        this.onChangeEventName = this.onChangeEventName.bind(this);
+        this.onChangeEventDesc = this.onChangeEventDesc.bind(this);
+        this.onChangeEventDate = this.onChangeEventDate.bind(this);
+        this.onChangeStartTime = this.onChangeStartTime.bind(this);
+        this.onChangeEndTime = this.onChangeEndTime.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     onChangeEventName(e) {
@@ -86,26 +65,45 @@ export default class EditEvent extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        const obj = {
+
+        console.log(`Form submitted:`);
+        console.log(`Event Name: ${this.state.event_name}`);
+        console.log(`Event Description: ${this.state.event_desc}`);
+        console.log(`Event Date: ${this.state.event_date}`);
+        console.log(`Start Time: ${this.state.start_time}`);
+        console.log(`End Time: ${this.state.end_time}`);
+
+        const newEvent = {
             event_owner: this.state.event_owner,
             event_name: this.state.event_name,
             event_desc: this.state.event_desc,
             event_date: this.state.event_date,
             start_time: this.state.start_time,
             end_time: this.state.end_time,
-            event_active: this.state.event_active
+            event_active: true,
         };
-        console.log(obj);
-        axios.post('http://localhost:4000/events/update/'+this.props.match.params.id, obj)
+
+        axios.post('http://localhost:4000/events/add', newEvent)
             .then(res => console.log(res.data));
+
+        // Reset the form state.
+        this.setState({
+            event_owner: '',
+            event_name: '',
+            event_desc: '',
+            event_date: '',
+            start_time: '',
+            end_time: '',
+            event_active: false
+        })
 
         this.props.history.push('/');
     }
 
     render() {
         return (
-            <div style={styles.container}>
-                <h3 align="center">Update Event</h3>
+            <div style={styles.pageContainer}>
+                <h3>Create New Event</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Event Name: </label>
@@ -118,7 +116,6 @@ export default class EditEvent extends Component {
                     <div className="form-group">
                         <label>Event Description: </label>
                         <textarea
-                                type="text"
                                 className="form-control"
                                 value={this.state.event_desc}
                                 onChange={this.onChangeEventDesc}
@@ -148,8 +145,8 @@ export default class EditEvent extends Component {
                                 onChange={this.onChangeEndTime}
                                 />
                     </div>
-                    <div className="form-group">
-                        <input type="submit" value="Update Event" className="btn btn-primary" />
+                    <div className="form-group" style={{paddingTop: '30px'}}>
+                        <input type="submit" value="Submit Event" className="btn btn-primary" />
                     </div>
                 </form>
             </div>
